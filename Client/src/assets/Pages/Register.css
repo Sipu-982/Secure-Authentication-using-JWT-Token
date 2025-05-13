@@ -1,0 +1,18 @@
+.input-field{
+    padding: 8px 0;
+}
+.input-field input{
+    outline: none;
+    transition: border-color 0.5s ease-in-out;
+
+}
+.input-field input:focus{
+    border-color: rgb(7, 15, 169);
+}
+.input-field button{
+    transition: 0.5s;
+}
+.input-field button:hover{
+    transform: scale(1.01);
+
+}
