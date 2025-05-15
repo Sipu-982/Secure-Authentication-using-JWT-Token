@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+
 // import axios from 'axios';
 import axios from 'axios'
 const Register = () => {
@@ -8,32 +10,13 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate()
-  const validateForm = () => {
-    if (!fullname.trim()) {
-      alert('Fullname is required!');
-      return false;
-    }
-    if (!email.trim()) {
-      alert('Email is required!');
-      return false;
-    }
-    if (!phone.trim()) {
-      alert('Phone is required!');
-      return false;
-    }
-    if (!password.trim()) {
-      alert('Password is required!');
-      return false;
-    }
-    return true;
-  };
-
+  const [showPassword, setShowPassword] = useState(false);
+   const navigate = useNavigate()
+  
+  
   const formSubmit = async (e) => {
+    // if(validateForm()) return
     e.preventDefault();
-
-    if (!validateForm()) return;
-
     try {
       const response = await axios.post('http://localhost:3002/api/authentication/register', {
         fullname,
@@ -48,6 +31,7 @@ const Register = () => {
       setEmail('');
       setPhone('');
       setPassword('');
+      setConfPassword('')
     } catch (error) {
       console.error(error);
       const errMsg =
@@ -99,17 +83,24 @@ const Register = () => {
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
-          <div className="input-field">
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
+          <div className="relative input-field">
+  <input
+    type={showPassword ? 'text' : 'password'}
+    name="password"
+    id="password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="Enter password"
+    className="w-full p-2 border border-gray-300 rounded pr-10"
+  />
+  <span
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+  >
+    {showPassword ? <AiFillEyeInvisible size={20} /> : <AiFillEye size={20} />}
+  </span>
+</div>
+
           <div className="input-field">
             <button
               type="submit"

@@ -8,6 +8,19 @@ try {
         if(!fullname || !email || !phone || !password){
           return  res.status(400).json({message:"All fields are required!"})
         }
+          const phoneRegex = /^[6-9]\d{9}$/;
+           if (!phoneRegex.test(phone)) {
+      return res.status(400).json({ message: "Invalid Phone Number!" });
+    }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,}$/;
+
+   if (!passwordRegex.test(password)) {
+  return res.status(400).json({
+    message:
+      "Password is incorrect!",
+  });
+}
+
         const findUser = await userModel.findOne({email})
         if(findUser){
           return  res.status(400).json({message:"User already exist, You can go to login"})
