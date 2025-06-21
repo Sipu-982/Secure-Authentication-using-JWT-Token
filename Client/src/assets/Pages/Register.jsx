@@ -31,7 +31,6 @@ const Register = () => {
       setEmail('');
       setPhone('');
       setPassword('');
-      setConfPassword('')
     } catch (error) {
       console.error(error);
       const errMsg =

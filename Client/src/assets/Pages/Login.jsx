@@ -41,9 +41,13 @@ const Login = () => {
       alert(errMsg);
     }
     }
+    const handleRoute = ()=>{
+     navigate('/sendotp')
+    }
+
   return (
     <div className="bg-neutral-100 w-full min-h-[90vh] flex justify-center items-center">
-      <div className="form w-120 min-h-[300px] flex justify-center items-center shadow-md bg-white p-8 rounded-xl">
+      <div className="form w-120 min-h-[300px] flex justify-center items-center shadow-sm bg-white border-1 border-gray-300 p-8 rounded-xl">
         <form onSubmit={formSubmit} className="space-y-4 w-full">
             <div className=""><h2 className='text-xl font-semibold text-blue-700'>login to your account</h2></div>
           <div className="input-field">
@@ -59,6 +63,8 @@ const Login = () => {
               Submit
             </button>
           </div>
+          <div className="flex justify-center"><span>-Or-</span></div>
+          <div className=""><button type='button' onClick={handleRoute} className='w-full cursor-pointer bg-green-600 text-white p-2 rounded hover:bg-blue-400'>Login with OTP</button></div>
           <div className="input-field text-center">
             <span>Don't have account? <Link to='register' className='text-blue-400'>register here</Link></span>
         </div>
